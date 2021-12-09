@@ -5,7 +5,15 @@
 
 using namespace std; 
 
-vector< vector<long double> > importFileData() {
+clock_t start;
+
+void setTime(int i){
+    if(i == 1) start = clock();
+    else if(i == 0) cout << "Elapsed time: " << (clock() - start)/(double) CLOCKS_PER_SEC << " seconds.\n";
+}
+
+
+vector< vector<long double>> importFileData() {
  	  string filename;
  	  ifstream inFS;
     cout << "Type in the name of the file to test: "; 
@@ -43,6 +51,30 @@ vector< vector<long double> > importFileData() {
     return dataSet;
 }
 
+void displaySet(vector<int> &dataSet) {
+      for(int i = 0; i < dataSet.size(); i++) {
+            cout << dataSet.at(i);
+              if(i != dataSet.size()-1) cout << ", ";
+        } 
+    }
+
+void simulateTest(vector< vector<long double>> dataSet) {
+    int sizeOfFeatures = dataSet.size() - 1;
+    int sizeOfInstances = dataSet.at(0).size();
+    
+    cout << "This dataset has " << sizeOfFeatures << " (not including the class atribute), with " << sizeOfInstances << " instances." << endl;
+    cout << "Running nearest neighbor with all " << sizeOfFeatures << " features, using \"leaving-one-out\" evaluation, I get an ";
+    cout << "accuracy of --- %" << endl;
+          
+    cout << "Beginning search." << endl << endl;
+
+    setTime(1);
+    int whichAlgorithm;
+    cin >> whichAlgorithm;
+    if(whichAlgorithm == 1) cout << "forward" << endl;
+    else cout << "backward" << endl;
+    setTime(0);
+}
 
 int main() {
     cout << "Welcome to Mika Shanela's Feature Selection Algorithm." << endl;
